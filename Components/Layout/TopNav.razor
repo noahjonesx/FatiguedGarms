@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Components.Routing
+
+<nav class="topnav">
+    <div class="nav-inner">
+        <a class="brand" href="/">8star</a>
+
+        <button class="menu-toggle" @onclick="Toggle" aria-expanded="@isOpen" aria-controls="primary-nav">
+            <span class="sr-only">Toggle navigation</span>
+            ☰
+        </button>
+
+        <ul id="primary-nav" class="links @(isOpen ? "open" : "")">
+            <li><NavLink href="/" Match="NavLinkMatch.All" class="nav-link">home</NavLink></li>
+            <li><NavLink href="/about" class="nav-link">about</NavLink></li>
+            <li><NavLink href="/store" class="nav-link">web store</NavLink></li>
+        </ul>
+    </div>
+</nav>
+
+@code {
+    private bool isOpen;
+
+    private void Toggle() => isOpen = !isOpen;
+}
