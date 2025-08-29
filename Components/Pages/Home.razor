@@ -2,6 +2,63 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="welcome-container">
+    <h1 class="main-title">Welcome to 8star.</h1>
+    <p class="subtitle">*previously known as Fatigued Garms*</p>
+    <p class="location">Atlanta, GA</p>
+</div>
 
-Welcome to your new app.
+<style>
+    body {
+        background-color: #2a2a2a;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    .welcome-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    }
+
+    .main-title {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: #f4f1de;
+        margin-bottom: 1.5rem;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        letter-spacing: 3px;
+        background: linear-gradient(45deg, #f4f1de, #e8e4c9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .subtitle {
+        font-family: 'Georgia', serif;
+        font-size: 1.3rem;
+        font-style: aria;
+        color: #d4c4a8;
+        margin: 0;
+        letter-spacing: 2px;
+        opacity: 0.9;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .location {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.1rem;
+        color: #b8a9a9;
+        margin: 1rem 0 0 0;
+        letter-spacing: 1px;
+        opacity: 0.8;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+</style>
