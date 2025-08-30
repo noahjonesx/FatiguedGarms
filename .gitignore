@@ -15,3 +15,6 @@ obj/
 
 # User-specific files
 *.swp
+
+# Cursor
+.cursor/rules/instructions.mdc
