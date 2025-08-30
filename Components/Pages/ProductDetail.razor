@@ -1,0 +1,119 @@
+@page "/product/{Id:int}"
+
+<div class="product-detail">
+    <div class="product-gallery">
+        <div class="main-image">
+            <img src="@Product?.ImageUrl" alt="@Product?.Name" />
+        </div>
+    </div>
+    
+    <div class="product-info">
+        <h1 class="product-title">@Product?.Name</h1>
+        <div class="product-price">$@Product?.Price</div>
+        
+        <div class="product-description">
+            @Product?.Description
+        </div>
+        
+        <div class="product-options">
+            <div class="size-selector">
+                <label>Size:</label>
+                <select @bind="SelectedSize">
+                    <option value="">Select Size</option>
+                    @if (Product?.AvailableSizes != null)
+                    {
+                        @foreach (var size in Product.AvailableSizes)
+                        {
+                            <option value="@size">@size</option>
+                        }
+                    }
+                </select>
+            </div>
+            
+            <div class="quantity-selector">
+                <label>Quantity:</label>
+                <input type="number" @bind="Quantity" min="1" max="10" />
+            </div>
+        </div>
+        
+        <button class="add-to-cart-btn" @onclick="AddToCart" disabled="@(string.IsNullOrEmpty(SelectedSize))">
+            Add to Cart
+        </button>
+        
+        <div class="product-meta">
+            <p>Free shipping on orders $75+</p>
+            <p>Handmade in Atlanta</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    
+    private ProductDetailModel? Product { get; set; }
+    private string SelectedSize { get; set; } = "";
+    private int Quantity { get; set; } = 1;
+    
+    protected override void OnInitialized()
+    {
+                 // Different products based on the ID to match the 8STAR aesthetic
+        Product = Id switch
+        {
+            1 => new ProductDetailModel
+                         {
+                 Id = Id,
+                 Name = "8star Patchwork Denim Jacket",
+                 Price = 125.00m,
+                 Description = "One-of-a-kind denim jacket featuring hand-sewn patchwork designs. Each patch tells a story - from vintage fabric scraps to geometric patterns. This piece is completely unique and handmade in Atlanta by 8star.",
+                 ImageUrl = "/images/item1.png",
+                 AvailableSizes = new List<string> { "S", "M", "L", "XL" }
+             },
+            2 => new ProductDetailModel
+                         {
+                 Id = Id,
+                 Name = "8star Distressed Patchwork Jeans",
+                 Price = 95.00m,
+                 Description = "Vintage-inspired jeans with extensive patchwork on thighs and shins. Features a mix of floral, striped, and geometric fabric patterns. Relaxed fit with frayed hems for that authentic worn-in look. Handmade by 8star.",
+                 ImageUrl = "/images/item2.png",
+                 AvailableSizes = new List<string> { "28", "30", "32", "34", "36" }
+             },
+            3 => new ProductDetailModel
+                         {
+                 Id = Id,
+                 Name = "8star Handmade Tote Bag",
+                 Price = 45.00m,
+                 Description = "Upcycled denim tote bag with patchwork design. Made from various fabric scraps and featuring a small denim pocket. Perfect for everyday use with a unique, handcrafted aesthetic by 8star.",
+                 ImageUrl = "/images/item3.png",
+                 AvailableSizes = new List<string> { "One Size" }
+             },
+            _ => new ProductDetailModel
+                         {
+                 Id = Id,
+                 Name = "8star Vintage Patchwork Jacket",
+                 Price = 89.99m,
+                 Description = "Handcrafted from vintage fabrics, this one-of-a-kind jacket features intricate patchwork patterns. Each piece is unique and tells its own story. Made by 8star in Atlanta.",
+                 ImageUrl = "/images/item1.png",
+                 AvailableSizes = new List<string> { "S", "M", "L", "XL" }
+             }
+        };
+    }
+    
+    private void AddToCart()
+    {
+        if (!string.IsNullOrEmpty(SelectedSize) && Quantity > 0)
+        {
+            Console.WriteLine($"Added {Quantity} {Product?.Name} (Size: {SelectedSize}) to cart");
+        }
+    }
+    
+    public class ProductDetailModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+        public decimal Price { get; set; }
+        public string Description { get; set; } = "";
+        public string ImageUrl { get; set; } = "";
+        public List<string>? AvailableSizes { get; set; }
+    }
+}

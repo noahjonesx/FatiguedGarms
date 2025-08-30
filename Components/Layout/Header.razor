@@ -1,0 +1,32 @@
+<header class="header">
+    <div class="header-container">
+        <div class="header-left">
+            <a href="/" class="brand-logo">8star</a>
+        </div>
+        
+        <nav class="header-nav">
+            <a href="/" class="nav-link">home</a>
+            <a href="/about" class="nav-link">about</a>
+            <a href="/store" class="nav-link">web store</a>
+        </nav>
+        
+        <div class="header-right">
+            <button class="cart-btn" @onclick="ToggleCart">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-count" @if="CartItemCount > 0">@CartItemCount</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+@code {
+    [Parameter]
+    public EventCallback OnCartToggle { get; set; }
+    
+    private int CartItemCount { get; set; } = 0; // This will be connected to actual cart later
+    
+    private async Task ToggleCart()
+    {
+        await OnCartToggle.InvokeAsync();
+    }
+}

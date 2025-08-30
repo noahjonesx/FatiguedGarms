@@ -1,30 +1,75 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">8star</a>
+﻿<nav class="topnav container" role="navigation" aria-label="Primary">
+  <!-- Left: Logo -->
+  <a href="/" class="brand" aria-label="Home">8star</a>
+
+  <!-- Center: Grouped nav clusters -->
+  <div class="clusters">
+    <div class="cluster">
+      <span class="cluster-label">shop</span>
+      <ul>
+        <li><a href="">women</a></li>
+        <li><a href="">men</a></li>
+        <li><a href="">objects</a></li>
+        <li><a href="">the jeans</a></li>
+      </ul>
     </div>
-</div>
+    <div class="cluster">
+      <span class="cluster-label">featured</span>
+      <ul>
+        <li><a href="">graphic tees</a></li>
+        <li><a href="">grand ole opry</a></li>
+        <li><a href="">sale</a></li>
+      </ul>
+    </div>
+  </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+  <!-- Right: Actions -->
+  <ul class="actions">
+    <li><a href="" aria-label="Search">search</a></li>
+    <li><a href="" aria-label="Account">login</a></li>
+    <li><a href="" aria-label="Cart">cart</a></li>
+  </ul>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> home
-            </NavLink>
-        </div>
+  <!-- Mobile hamburger -->
+  <button class="hamburger" @onclick="ToggleMenu" aria-expanded="@isOpen" aria-controls="mobileMenu">
+    <span class="visually-hidden">Open menu</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="about">
-                <span class="bi bi-info-circle-fill-nav-menu" aria-hidden="true"></span> about
-            </NavLink>
-        </div>
+  @if (isOpen)
+  {
+    <div id="mobileMenu" class="mobile" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="mobile-sheet">
+        <button class="close" @onclick="ToggleMenu" aria-label="Close menu">×</button>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="webstore">
-                <span class="bi bi-shop-fill-nav-menu" aria-hidden="true"></span> web store
-            </NavLink>
-        </div>
-    </nav>
-</div>
+        <nav aria-label="Mobile primary">
+          <div class="m-cluster">
+            <span>shop</span>
+            <a href="">women</a>
+            <a href="">men</a>
+            <a href="">objects</a>
+            <a href="">the jeans</a>
+          </div>
+          <div class="m-cluster">
+            <span>featured</span>
+            <a href="">graphic tees</a>
+            <a href="">grand ole opry</a>
+            <a href="">sale</a>
+          </div>
+          <div class="m-actions">
+            <a href="">search</a>
+            <a href="">login</a>
+            <a href="">cart</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  }
+</nav>
 
+@code {
+  private bool isOpen;
+  private void ToggleMenu() => isOpen = !isOpen;
+}
